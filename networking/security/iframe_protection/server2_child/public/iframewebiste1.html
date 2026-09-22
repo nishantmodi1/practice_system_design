@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clickjacking Iframe</title>
+</head>
+<body>
+  <h1>child Iframe</h1>
+  <p>Iframe: click button to see a simple clickjacking demostration.</p>
+
+  <button style="background-color: red;" onclick="alert('clicked iframe')">Click me iframe!</button>
+
+  <script>
+    // simulate a clickjacking attack by overlaying
+    document
+      .getElementById('overlay-button').addEventListener("click", () => {
+        alert("button clicked")
+      })
+  </script>
+</body>
+</html>

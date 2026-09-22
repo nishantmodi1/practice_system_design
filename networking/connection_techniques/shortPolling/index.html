@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1>Short Polling</h1>
+  <p>Short polling is a technique used in web development to periodically check for updates from a server. In short polling, the client sends a request to the server at regular intervals (e.g., every few seconds) to check for new data or updates. If there is new data available, the server responds with the updated information; if not, it may respond with an empty response or a status indicating no new data.</p>
+  <div id="data-container"></div>
+</body>
+
+<script>
+  async function getData() {
+    try {
+      const response = await fetch('/getData')
+      const result = await response.json() //use .json to parse the response as JSON or desrialize the response as JSON
+      document.getElementById('data-container').innerText = result.data
+
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  }
+
+  let intervalId;
+  function shortPolling() {
+    intervalId = setInterval(() => {
+      getData()
+    }, 5000)
+  }
+  shortPolling()
+
+  clearInterval(intervalId) //to stop the short polling
+</script>
+</html>
